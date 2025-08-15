@@ -21,11 +21,11 @@ spec:
         - containerPort: 3000
         livenessProbe:
           httpGet:
-            path: /health
+            path: /api/health
             port: 3000
         readinessProbe:
           httpGet:
-            path: /health
+            path: /api/health
             port: 3000
         resources:
           limits:
