@@ -12,6 +12,12 @@ docker build -t calendar-app .
 docker run -p 3000:3000 calendar-app
 ```
 
+## For github container registry
+
+```bash
+docker tag calendar-app:latest ghcr.io/sayjeyhi/test-image:latest
+```
+
 
 ```bash
 # Tag for OrbStack's local registry
