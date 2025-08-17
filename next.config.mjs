@@ -10,9 +10,7 @@ const nextConfig = {
     unoptimized: true,
   },
   output: 'standalone',
-  experimental: {
-    serverComponentsExternalPackages: [],
-  },
+  serverExternalPackages: [],
   // Ensure the server binds to all interfaces
   serverRuntimeConfig: {
     hostname: '0.0.0.0',

@@ -23,10 +23,18 @@ spec:
           httpGet:
             path: /api/health
             port: 3000
+          initialDelaySeconds: 10   # wait 10s before first check
+          periodSeconds: 10         # check every 10s
+          timeoutSeconds: 3         # allow up to 3s response time
+          failureThreshold: 3
         readinessProbe:
           httpGet:
             path: /api/health
             port: 3000
+          initialDelaySeconds: 5    # usually smaller than liveness
+          periodSeconds: 10
+          timeoutSeconds: 3
+          failureThreshold: 3
         resources:
           limits:
             cpu: '1000m'
