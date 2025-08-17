@@ -1,0 +1,36 @@
+# Local development values for calendar-app
+# Usage: helm install calendar-app ./helm/calendar-app -f values-local.yaml
+
+# Image configuration for local development
+image:
+  repository: calendar-app
+  tag: latest
+  pullPolicy: Never
+
+# Resource configuration for local development
+resources:
+  limits:
+    cpu: 200m
+    memory: 256Mi
+  requests:
+    cpu: 100m
+    memory: 128Mi
+
+# Service configuration for local development
+service:
+  type: LoadBalancer
+
+# Disable ingress for local development
+ingress:
+  enabled: false
+
+# Disable middleware for local development
+middleware:
+  enabled: false
+  redirectHttps:
+    enabled: false
+    permanent: true
+
+# Environment variables for local development
+env:
+  NODE_ENV: development

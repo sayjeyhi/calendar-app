@@ -1,0 +1,82 @@
+# Production values for calendar-app
+# Usage: helm install calendar-app ./helm/calendar-app -f values-production.yaml
+
+# Production image configuration
+image:
+  repository: ghcr.io/sayjeyhi/calendar-app
+  tag: latest
+  pullPolicy: Always
+
+# Production resource configuration
+resources:
+  limits:
+    cpu: 2000m
+    memory: 2048Mi
+  requests:
+    cpu: 1000m
+    memory: 1024Mi
+
+# Production deployment configuration
+deployment:
+  replicas: 3
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+
+# Production health check configuration
+healthChecks:
+  livenessProbe:
+    initialDelaySeconds: 30
+    periodSeconds: 15
+    timeoutSeconds: 5
+    failureThreshold: 3
+  readinessProbe:
+    initialDelaySeconds: 10
+    periodSeconds: 15
+    timeoutSeconds: 5
+    failureThreshold: 3
+
+# Production service configuration
+service:
+  type: ClusterIP
+
+# Production ingress configuration
+ingress:
+  enabled: true
+  className: traefik
+  annotations:
+    cert-manager.io/cluster-issuer: "letsencrypt-production"
+    traefik.ingress.kubernetes.io/router.tls: "true"
+    traefik.ingress.kubernetes.io/router.entrypoints: "web,websecure"
+    traefik.ingress.kubernetes.io/router.priority: "1000"
+  hosts:
+    - host: calendar.iwaskidding.com
+      paths:
+        - path: /
+          pathType: Prefix
+  tls:
+    - secretName: calendar-app-tls-v2
+      hosts:
+        - calendar.iwaskidding.com
+
+# Production middleware configuration (explicitly enabled)
+middleware:
+  enabled: true
+  redirectHttps:
+    enabled: true
+    permanent: true
+
+# Production environment variables
+env:
+  NODE_ENV: production
+
+# Production labels and annotations
+labels:
+  environment: production
+  tier: web
+
+annotations:
+  prometheus.io/scrape: "true"
+  prometheus.io/port: "3000"
