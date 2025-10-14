@@ -59,7 +59,7 @@ ingress:
     traefik.ingress.kubernetes.io/router.tls: "true"
     traefik.ingress.kubernetes.io/router.entrypoints: "web,websecure"
     traefik.ingress.kubernetes.io/router.priority: "1000"
-    traefik.ingress.kubernetes.io/router.middlewares: "test-helm-https-redirect@kubernetescrd"
+    traefik.ingress.kubernetes.io/router.middlewares: "test-helm-calendar-app-test-redirect-https@kubernetescrd"
   hosts:
     - host: test-helm.iwaskidding.com
       paths:
