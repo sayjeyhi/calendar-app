@@ -53,6 +53,8 @@ jobs:
             ghcr.io/${{ env.REPOSITORY_NAME }}:${{ env.COMMIT_SHA_SHORT }}
             ghcr.io/${{ env.REPOSITORY_NAME }}:${{ env.CURRENT_DATE }}
             ghcr.io/${{ env.REPOSITORY_NAME }}:latest
+          cache-from: type=registry,ref=ghcr.io/${{ env.REPOSITORY_NAME }}:buildcache
+          cache-to: type=registry,ref=ghcr.io/${{ env.REPOSITORY_NAME }}:buildcache,mode=max
 
       - name: Deploy
         uses: Azure/k8s-deploy@v5.0.1
