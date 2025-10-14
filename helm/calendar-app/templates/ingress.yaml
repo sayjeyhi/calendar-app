@@ -3,6 +3,9 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: {{ include "calendar-app.fullname" . }}-ingress
+  {{- if .Values.namespace }}
+  namespace: {{ .Values.namespace }}
+  {{- end }}
   labels:
     {{- include "calendar-app.labels" . | nindent 4 }}
   {{- with .Values.ingress.annotations }}

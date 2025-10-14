@@ -27,6 +27,15 @@ helm template calendar-app ./helm/calendar-app
 helm install calendar-app ./helm/calendar-app
 ```
 
+### Run on test environment
+```bash
+# Test with test values
+helm template calendar-app-test ./helm/calendar-app -f helm/calendar-app/values-test.yaml
+
+# Install test environment
+helm install calendar-app-test ./helm/calendar-app -f helm/calendar-app/values-test.yaml --namespace test-helm --create-namespace
+```
+
 # Upgrade existing installation
 helm upgrade calendar-app ./calendar-app
 
@@ -41,6 +50,7 @@ The chart supports environment-specific configurations:
 
 - **Default values**: `values.yaml` - Production configuration
 - **Local development**: `values-local.yaml` - Local development setup
+- **Test environment**: `values-test.yaml` - Test environment setup (test-helm.iwaskidding.com)
 
 #### Features
 
